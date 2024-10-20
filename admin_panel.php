@@ -12,6 +12,7 @@ if ($_SESSION['role'] != 'admin') {
 <head>
     <title>Admin Dashboard</title>
 </head>
+<link rel="stylesheet" href="client.css">
 
 <body>
     <h1>Admin Dashboard</h1>
