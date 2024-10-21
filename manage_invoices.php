@@ -21,11 +21,52 @@ $result = mysqli_query($conn, $query);
 
 <head>
     <title>Manage Invoices</title>
-    <link rel="stylesheet" href="client.css">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+            background-color: #333;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
 
         th,
@@ -42,6 +83,31 @@ $result = mysqli_query($conn, $query);
 
         tr:hover {
             background-color: #f1f1f1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .actions a {
+            text-decoration: none;
+            color: #5cb85c;
+            margin: 0 5px;
+        }
+
+        .actions a:hover {
+            text-decoration: underline;
+            color: #4cae4c;
+        }
+
+        .container {
+            padding: 20px;
         }
     </style>
 </head>
@@ -61,7 +127,7 @@ $result = mysqli_query($conn, $query);
         </ul>
     </nav>
 
-    <div style="padding: 20px;">
+    <div class="container">
         <h2>Invoices List</h2>
 
         <table>
@@ -83,7 +149,7 @@ $result = mysqli_query($conn, $query);
                             <td>{$row['registrationNo']}</td>
                             <td>{$row['amount']}</td>
                             <td>{$row['methodName']}</td>
-                            <td>
+                            <td class='actions'>
                                 <a href='view_invoice.php?id={$row['invoiceNo']}'>View</a> |
                                 <a href='delete_invoice.php?id={$row['invoiceNo']}'>Delete</a>
                             </td>
@@ -97,7 +163,7 @@ $result = mysqli_query($conn, $query);
         </table>
     </div>
 
-    <footer style="text-align: center; padding: 20px; background-color: #333; color: white;">
+    <footer>
         <p>&copy; 2024 Admin Dashboard. All rights reserved.</p>
     </footer>
 </body>

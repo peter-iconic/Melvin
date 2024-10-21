@@ -28,7 +28,25 @@ if ($employeesResult) {
     }
 }
 
+// Fetch course types from the database for the dropdown
+$courseTypesQuery = "SELECT courseTypeNo, description AS courseTypeName FROM CourseType";
+$courseTypesResult = mysqli_query($conn, $courseTypesQuery);
+$courseTypes = [];
+if ($courseTypesResult) {
+    while ($row = mysqli_fetch_assoc($courseTypesResult)) {
+        $courseTypes[] = $row;
+    }
+}
 
+// Fetch course fees from the database for the dropdown
+$courseFeesQuery = "SELECT courseFeeNo, amount FROM CourseFee";
+$courseFeesResult = mysqli_query($conn, $courseFeesQuery);
+$courseFees = [];
+if ($courseFeesResult) {
+    while ($row = mysqli_fetch_assoc($courseFeesResult)) {
+        $courseFees[] = $row;
+    }
+}
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -67,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -147,8 +166,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php } ?>
         </select>
 
-        <!-- Input for course fee number -->
-        <input type="number" name="courseFeeNo" placeholder="Course Fee No" required>
+        <!-- Dropdown for selecting course fee -->
+        <select name="courseFeeNo" required>
+            <option value="">Select Course Fee</option>
+            <?php foreach ($courseFees as $courseFee) { ?>
+                <option value="<?php echo $courseFee['courseFeeNo']; ?>"><?php echo $courseFee['amount']; ?></option>
+            <?php } ?>
+        </select>
 
         <!-- Dropdown for selecting employee number -->
         <select name="employeeNo" required>
